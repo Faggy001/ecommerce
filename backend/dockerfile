@@ -19,6 +19,7 @@ RUN apt-get install -y libtcl8.6 libtk8.6
 # Copy the application code
 COPY . .
 
+ENV SECRET_KEY
 
 # Collect static files
 RUN python manage.py collectstatic --no-input
