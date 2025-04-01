@@ -19,6 +19,8 @@ RUN apt-get install -y libtcl8.6 libtk8.6
 # Copy the application code
 COPY . .
 
+ENV SECRET_KEY=django-insecure-%#glg4fdwzoh_u2e9-wkwli45+&m!foy3su7lm5zxohibah2#^
+
 # Collect static files
 RUN python manage.py collectstatic --no-input
 
