@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 
     # My Apps
     'base.apps.BaseConfig',
-
+    'rest_framework_simplejwt',
     # Dependency App
     'rest_framework',
     'corsheaders',
