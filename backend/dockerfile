@@ -1,30 +1,30 @@
-# Use an official Amazon Linux 2 image as the base
-FROM amazonlinux:2
+FROM python:3.12-slim
 
-# Install dependencies
-RUN yum install -y python3 python3-pip
+# Install dependencies for Pillow and other requirements
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    python3-dev \
+    zlib1g-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    liblcms2-dev \
+    libopenjp2-7-dev \
+    libwebp-dev \
+    libtiff-dev \
+    libx11-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libxcb1-dev
 
-# Set the working directory to /app
 WORKDIR /app
 
-# Copy the requirements file
 COPY requirements.txt .
 
-# Install the dependencies
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application code
-COPY . .
-
-ENV SECRET_KEY
-# Collect static files
-RUN python3 manage.py collectstatic --no-input
-
-# Expose the port
+COPY ./backend 
+ENV SECRET_KEY=$SECRET_KEY
 EXPOSE 8000
-
-# Run the command to start the development server
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
-
+CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000"]
 
 
