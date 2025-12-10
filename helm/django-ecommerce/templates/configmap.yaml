@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  DEBUG: "{{ .Values.config.debug }}"
+  ALLOWED_HOSTS: "{{ .Values.config.allowedHosts }}"
+  DB_NAME: "{{ .Values.config.dbName }}"
+  DB_USER: "{{ .Values.config.dbUser }}"
+  DB_HOST: "{{ .Values.config.dbHost }}"
+  DB_PORT: "{{ .Values.config.dbPort }}"

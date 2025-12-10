@@ -1,0 +1,28 @@
+replicaCount: 2
+
+image:
+  repository: django-ecommerce
+  tag: latest
+  pullPolicy: IfNotPresent
+
+
+service:
+  port: 80
+  type: LoadBalancer
+
+config:
+  debug: "False"
+  allowedHosts: "*"
+  dbName: "ecommerce"
+  dbUser: "ecomuser"
+  dbHost: "postgres"
+  dbPort: "5432"
+
+secret:
+  secretKey: "your-super-secret-key"
+  dbPassword: "strong-db-password"
+
+ingress:
+  enabled: false
+  className: "nginx"
+  host: "shop.example.com"
