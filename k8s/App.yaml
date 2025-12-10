@@ -16,10 +16,5 @@ spec:
       - name: django-app
         image: faggy001/ecommerce:latest
         ports: 
-        - containerPort: 8000  
-        volumeMounts:
-        - name: sqlite-db
-          mountPath: /app/db
-      volumes:
-      - name: sqlite-db
-        emptyDir: {}
+        - containerPort: 8000
+
